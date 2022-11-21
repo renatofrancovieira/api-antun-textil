@@ -1,7 +1,7 @@
 package br.com.antun.apiantuntextil.controllers;
 
-import br.com.antun.apiantuntextil.models.Produto;
-import br.com.antun.apiantuntextil.services.ProdutoService;
+import br.com.antun.apiantuntextil.models.Estoque;
+import br.com.antun.apiantuntextil.services.EstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -9,42 +9,42 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/produto")
-public class ProdutoController {
+@RequestMapping("/estoque")
+public class EstoqueController {
 	
 	@Autowired
-	private ProdutoService service;
+	private EstoqueService service;
 
 	@RequestMapping(method=RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Produto> findAll() {
+	public List<Estoque> findAll() {
 		return service.findAll();
 	}
 	
-	@RequestMapping(value = "/{idProduto}",
+	@RequestMapping(value = "/{idEstoque}",
 			method=RequestMethod.GET,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public Produto findById(@PathVariable(value = "idProduto") Long idProduto) {
-		return service.findById(idProduto);
+	public Estoque findById(@PathVariable(value = "idEstoque") Long idEstoque) {
+		return service.findById(idEstoque);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public Produto create(@RequestBody Produto Produto) {
-		return service.create(Produto);
+	public Estoque create(@RequestBody Estoque Estoque) {
+		return service.create(Estoque);
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT,
 			consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public Produto update(@RequestBody Produto Produto) {
-		return service.update(Produto);
+	public Estoque update(@RequestBody Estoque Estoque) {
+		return service.update(Estoque);
 	}
 	
-	@RequestMapping(value = "/{idProduto}",
+	@RequestMapping(value = "/{idEstoque}",
 			method=RequestMethod.DELETE)
-	public void delete(@PathVariable(value = "idProduto") Long idProduto) {
-		service.delete(idProduto);
+	public void delete(@PathVariable(value = "idEstoque") Long idEstoque) {
+		service.delete(idEstoque);
 	}
 }

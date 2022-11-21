@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Builder
 @AllArgsConstructor
@@ -13,8 +14,8 @@ import java.sql.Date;
 @Setter
 @ToString
 @Entity
-@Table(name = "pedido_venda")
-public class PedidoVenda implements Serializable {
+@Table(name = "movimento_estoque")
+public class MovimentoEstoque implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,15 +23,15 @@ public class PedidoVenda implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "id_estoque", nullable = false)
+    private Long idEstoque;
+
     @Column(name = "data", nullable = false)
     private Date data;
 
-    @Column(name = "id_cliente", nullable = false)
-    private Long idCliente;
+    @Column(name = "entrada", nullable = false)
+    private BigDecimal entrada;
 
-    @Column(name = "id_empresa", nullable = false)
-    private Long idEmpresa;
-
-    @Column(name = "status", nullable = false, length = 1)
-    private String status;
+    @Column(name = "saida", nullable = false)
+    private BigDecimal saida;
 }

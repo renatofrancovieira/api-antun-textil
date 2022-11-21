@@ -12,8 +12,8 @@ import java.io.Serializable;
 @Setter
 @ToString
 @Entity
-@Table(name = "produto")
-public class Produto implements Serializable {
+@Table(name = "cliente")
+public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,6 +27,9 @@ public class Produto implements Serializable {
     @Column(name = "nome", nullable = false, length = 255)
     private String nome;
 
-    @Column(name = "id_unidade", nullable = false)
-    private Long idUnidade;
+    @Column(name = "documento", nullable = false, length = 255)
+    private String documento;
+
+    @Column(name = "tipo_documento", nullable = false, length = 1)
+    private String tipoDocumento;
 }

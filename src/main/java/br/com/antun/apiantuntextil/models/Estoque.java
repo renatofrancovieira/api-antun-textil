@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Builder
 @AllArgsConstructor
@@ -12,8 +13,8 @@ import java.io.Serializable;
 @Setter
 @ToString
 @Entity
-@Table(name = "produto")
-public class Produto implements Serializable {
+@Table(name = "estoque")
+public class Estoque implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -21,12 +22,12 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "codigo", nullable = false, length = 255)
-    private String codigo;
+    @Column(name = "id_empresa", nullable = false)
+    private Long idEmpresa;
 
-    @Column(name = "nome", nullable = false, length = 255)
-    private String nome;
+    @Column(name = "id_produto", nullable = false)
+    private Long idProduto;
 
-    @Column(name = "id_unidade", nullable = false)
-    private Long idUnidade;
+    @Column(name = "quantidade", nullable = false)
+    private BigDecimal quantidade;
 }

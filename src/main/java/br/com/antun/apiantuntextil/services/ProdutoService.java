@@ -10,55 +10,54 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @Service
-public class ProdutoServices {
-	
-	private Logger logger = Logger.getLogger(ProdutoServices.class.getName());
-	
+public class ProdutoService {
+
+	private Logger logger = Logger.getLogger(Produto.class.getName());
+
 	@Autowired
 	ProdutoRepository repository;
 
 	public List<Produto> findAll() {
 
-		logger.info("Procurando por todos os produtos.");
+		logger.info("Listando todos os produtos.");
 
 		return repository.findAll();
 	}
 
 	public Produto findById(Long id) {
-		
-		logger.info("Procurando por um produto.");
-		
+
+		logger.info(String.format("Procurando produto com ID [%s].", id));
+
 		return repository.findById(id)
-			.orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado para esse ID!"));
+				.orElseThrow(() -> new ResourceNotFoundException(String.format("Nenhum produto foi encontrado com ID [%s].", id)));
 	}
-	
+
 	public Produto create(Produto produto) {
 
-		logger.info("Criando um produto.");
-		
+		logger.info(String.format("Criando novo produto. [%s]", produto.toString()));
+
 		return repository.save(produto);
 	}
-	
+
 	public Produto update(Produto produto) {
-		
-		logger.info("Atualizando um produto.");
-		
-		var entity = repository.findById(produto.getId())
-			.orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado para esse ID!"));
 
-		entity.setId(produto.getId());
-		entity.setCodigoProduto(produto.getCodigoProduto());
-		entity.setNomeProduto(produto.getNomeProduto());
+		logger.info(String.format("Atualizando produto com ID [%s].", produto.getId()));
+
+		var entity = repository.findById(produto.getId())
+				.orElseThrow(() -> new ResourceNotFoundException(String.format("Nenhum produto foi encontrado com ID [%s].", produto.getId())));
+
+		entity.setCodigo(produto.getCodigo());
+		entity.setNome(produto.getNome());
 
 		return repository.save(produto);
 	}
-	
+
 	public void delete(Long id) {
-		
-		logger.info("Apagando um produto.");
-		
+
+		logger.info(String.format("Apagando produto com ID [%s].", id));
+
 		var entity = repository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontrado para esse ID!"));
+				.orElseThrow(() -> new ResourceNotFoundException(String.format("Nenhum produto foi encontrado com ID [%s].", id)));
 		repository.delete(entity);
 	}
 }
